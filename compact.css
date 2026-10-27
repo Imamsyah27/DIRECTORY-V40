@@ -1,0 +1,51 @@
+/* =====================================================================
+   COMPACT — tampilan dashboard admin lebih padat & mudah diklik
+   (dimuat paling akhir; hanya menimpa ukuran/jarak, warna & tema tetap)
+   ===================================================================== */
+body{ font-size:13.5px; }
+.panel{ padding:12px 14px; margin-bottom:10px; border-radius:12px; box-shadow:none; }
+.panel-title{ font-size:13.5px; margin-bottom:8px; padding-bottom:6px; }
+.panel-hint{ font-size:11px; }
+.btn{ padding:7px 12px; font-size:12.5px; border-radius:9px; }
+.btn.mini, .btn-icon{ padding:5px 8px; }
+.muted-note{ font-size:12px; margin:0 0 8px; }
+.field input, .field select, .field textarea{ padding:7px 10px; font-size:13px; }
+.field label{ font-size:12px; margin-bottom:3px; }
+
+/* header + menu */
+header.app-header{ padding:6px 14px; }
+header.app-header h1, header.app-header .brand-title{ font-size:15px; }
+.page-nav{ padding:3px; gap:2px; }
+.page-nav button{ padding:6px 10px; font-size:12px; }
+.page-nav button .nav-icon{ font-size:13px; }
+
+/* tab dashboard + statistik kecil */
+.stats{ gap:6px; margin-bottom:8px; }
+.stat-card{ padding:6px 10px; border-radius:10px; }
+.stat-card .label{ font-size:11px; }
+.stat-card .value{ font-size:16px; }
+
+/* belum dicentang: satu baris tipis */
+.unchecked-bar{ padding:6px 12px; gap:6px 14px; margin-bottom:8px; border-left-width:3px; flex-wrap:wrap; }
+.unchecked-main{ display:flex; align-items:baseline; gap:8px; }
+.unchecked-title{ font-size:12px; }
+.unchecked-total{ font-size:16px; }
+.unchecked-total small{ font-size:11px; }
+.uc-chip{ padding:3px 10px; font-size:11.5px; }
+#ucInfo{ display:none; }
+
+/* antrian perpanjangan: ringkas, kosong = satu baris */
+.rn-empty, .state-block{ padding:10px; font-size:12.5px; }
+.rn-filter button{ padding:4px 10px; font-size:11.5px; }
+
+/* tabel */
+table th, table td{ padding:7px 9px; font-size:12.5px; }
+.table-wrap{ border-radius:10px; }
+.chip, .badge{ font-size:11px; }
+.pr-grid{ gap:8px; }
+.pr-avail-col{ padding:8px 10px; }
+
+.theme-switch{ gap:4px; }
+.theme-switch button{ padding:3px 9px; font-size:11px; border-radius:99px; }
+#rnEmpty, .rn-empty{ padding:6px 0 !important; font-size:12px; }
+.rn-panel, #rnPanel{ padding-bottom:8px; }
