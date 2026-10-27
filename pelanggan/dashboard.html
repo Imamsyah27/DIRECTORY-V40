@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0D1224">
+<title>Dashboard Saya — Portal Monitoring Langganan</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="themes.css">
+<link rel="stylesheet" href="theme-dark.css">
+<link rel="stylesheet" href="compact.css">
+<script src="theme-switch.js" data-key="pelanggan_theme"></script>
+</head>
+<body>
+<div id="rateBar"></div>
+
+<div class="portal-shell">
+
+    <div class="lang-switch" style="margin-bottom:12px; justify-content:flex-end;">
+        <button type="button" data-lang="id">ID</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="vi">VI</button>
+        <button type="button" data-lang="ar">AR</button>
+        <button type="button" data-lang="tr">TR</button>
+    </div>
+
+    <div class="portal-header">
+        <div class="greet">
+            <h1 id="greetTitle">Halo 👋</h1>
+            <span data-i18n="greet_sub">Ringkasan langganan harian milik Anda</span>
+        </div>
+        <div class="actions">
+            <button class="btn btn-primary contact-admin-btn" id="contactAdminBtn">📞 <span data-i18n="ct_btn">Hubungi Admin</span></button>
+            <button class="btn btn-outline" id="gantiPwToggleBtn">🔒 <span data-i18n="btn_change_password">Ganti Password</span></button>
+            <button class="btn btn-danger" id="logoutBtn" data-i18n="btn_logout">Keluar</button>
+        </div>
+    </div>
+
+    <div class="panel" id="gantiPwPanel" style="display:none;">
+        <div class="panel-title">🔒 <span data-i18n="change_password_title">Ganti Password</span></div>
+        <div class="form-msg" id="gantiPwMsg"></div>
+        <div class="field">
+            <label for="pwLama" data-i18n="label_old_password">Password Lama</label>
+            <div class="pw-wrap">
+                <input type="password" id="pwLama" autocomplete="current-password">
+                <button type="button" class="pw-toggle" onclick="togglePasswordField('pwLama', this)">👁️</button>
+            </div>
+        </div>
+        <div class="field">
+            <label for="pwBaru" data-i18n="label_new_password">Password Baru (minimal 6 karakter)</label>
+            <div class="pw-wrap">
+                <input type="password" id="pwBaru" autocomplete="new-password">
+                <button type="button" class="pw-toggle" onclick="togglePasswordField('pwBaru', this)">👁️</button>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-block" id="simpanPwBtn" style="margin-top:6px;" data-i18n="btn_save_password">Simpan Password Baru</button>
+    </div>
+
+    <div id="annBox"></div>
+    <div id="arcNotice"></div>
+
+    <nav class="p-tabs" id="pTabs">
+        <button type="button" class="active" data-ptab="home">🏠 <span data-i18n="tab_home">Beranda</span></button>
+        <button type="button" data-ptab="bot">🤖 <span data-i18n="bo_tab">Bot Order</span> <span class="tab-badge" id="botTabBadge" style="display:none">0</span></button>
+        <button type="button" data-ptab="catalog">🛍 <span data-i18n="cat_menu">Catalog</span></button>
+        <button type="button" data-ptab="arsip">🗂️ <span data-i18n="tab_archive">Arsip Saya</span> <span class="tab-badge" id="arsipTabBadge" style="display:none">0</span></button>
+        <button type="button" data-ptab="supply">📦 <span data-i18n="tab_supply">Supply & Stock</span></button>
+        <button type="button" data-ptab="renew">🔄 <span data-i18n="rn_tab">Perpanjangan</span> <span class="tab-badge" id="rnTabBadge" style="display:none">0</span></button>
+        <button type="button" data-ptab="grafik">📊 <span data-i18n="tab_chart">Grafik</span></button>
+    </nav>
+
+    <div class="p-tab" id="ptab-home">
+    <div class="kpi-strip">
+        <div class="kpi-chip"><span class="k-label" data-i18n="summary_active">Langganan Aktif</span><b id="sumJumlah">0</b></div>
+        <div class="kpi-chip clickable limit" id="cardLimit" data-i18n-title="hint_click_filter" title="Klik untuk filter"><span class="k-label">✅ <span data-i18n="summary_limit_reached">Limit Tercapai</span></span><b id="sumLimit">0</b></div>
+        <div class="kpi-chip clickable tomorrow" id="cardTomorrow" data-i18n-title="hint_click_filter" title="Klik untuk filter"><span class="k-label">⏰ <span data-i18n="summary_limit_tomorrow">Akan Limit Besok</span></span><b id="sumTomorrow">0</b></div>
+        <div class="kpi-chip"><span class="k-label" data-i18n="kpi_all_orders">Total Pesanan</span><b id="kpiAll">0</b></div>
+        <div class="kpi-chip"><span class="k-label" data-i18n="kpi_since">Mulai Memesan</span><b id="kpiSince" class="small">-</b></div>
+        <div class="kpi-chip"><span class="k-label" data-i18n="kpi_archived">Pesanan Diarsipkan</span><b id="kpiArsip">0</b></div>
+        <div class="kpi-chip"><span class="k-label" data-i18n="kpi_supply_orders">Order Supply</span><b id="kpiSupply">0</b></div>
+    </div>
+
+    <div id="coinBox"></div>
+    <div id="priceList"></div>
+
+
+
+    <div class="panel">
+        <div class="panel-title">📋 <span data-i18n="detail_title">Detail Langganan Anda</span></div>
+        <div class="order-new-row"><button type="button" class="btn btn-primary" data-new-order>➕ <span data-i18n="no_btn">Pesan Langganan Baru</span></button> <button type="button" class="btn btn-primary" data-bot-order>🤖 <span data-i18n="bo_btn">Pesan Bot Order</span></button> <button type="button" class="btn btn-primary" data-bulk-order>🧺 <span data-i18n="bk_btn">Pesan Bulk Order</span></button></div>
+
+        <div class="tag-search">
+            <input type="text" id="tagSearchInput" data-i18n-placeholder="search_placeholder" placeholder="Cari tagar langganan Anda..." autocomplete="off">
+            <button type="button" class="btn btn-ghost" id="tagSearchClear" data-i18n-title="search_clear" title="Hapus pencarian" style="display:none;">✕</button>
+        </div>
+        <div class="search-result" id="tagSearchResult" style="display:none;"></div>
+
+        <div class="list-toolbar">
+        <div class="filter-tabs" id="filterTabs">
+            <button type="button" data-f="all" class="on"><span data-i18n="filter_all">Semua</span> <i id="fcAll">0</i></button>
+            <button type="button" data-f="limit">✅ <span data-i18n="filter_limit_tab">Sudah Limit</span> <i id="fcLimit">0</i></button>
+            <button type="button" data-f="tomorrow">⏰ <span data-i18n="filter_tomorrow_tab">Akan Limit Besok</span> <i id="fcTomorrow">0</i></button>
+        </div>
+            <div class="view-switch" id="viewSwitch" role="group" aria-label="Tampilan">
+                <button type="button" data-view="table" class="on" data-i18n-title="view_table" title="Tabel">▦ <span data-i18n="view_table">Tabel</span></button>
+                <button type="button" data-view="box" data-i18n-title="view_box" title="Box">▭ <span data-i18n="view_box">Box</span></button>
+            </div>
+        </div>
+
+
+        <div id="orderList"></div>
+
+        <div class="state-block" id="loadingState">
+            <div class="spinner"></div>
+            <div data-i18n="loading_orders">Memuat data langganan...</div>
+        </div>
+
+        <div class="state-block" id="emptyState" style="display:none;">
+            <div class="icon">🗒️</div>
+            <div><b id="emptyTitle" data-i18n="empty_orders_title">Belum ada data langganan aktif</b></div>
+            <div style="font-size:12.5px; margin-top:4px;" id="emptySub" data-i18n="empty_orders_sub">Hubungi admin jika Anda merasa ini keliru.</div>
+        </div>
+    </div>
+    </div><!-- /ptab-home -->
+
+    <div class="p-tab" id="ptab-grafik" style="display:none;">
+    <div class="panel chart-fold" id="chartFold">
+        <div class="fold-head" id="chartFoldBtn" aria-expanded="true">
+            <span>📈 <span data-i18n="charts_title">Grafik Pesanan</span></span><span class="fold-caret">▾</span>
+        </div>
+        <div class="fold-body" id="chartFoldBody">
+            <div class="panel">
+                <div class="panel-title">📅 <span data-i18n="chart_monthly">Pesanan per Bulan</span></div>
+                <div class="chart-box"><canvas id="cuChartBulan"></canvas></div>
+            </div>
+            <div class="chart-grid">
+                <div class="panel"><div class="panel-title">🍩 <span data-i18n="chart_composition">Pesanan per Dashboard</span></div><div class="chart-box sm"><canvas id="cuChartDash"></canvas></div></div>
+                <div class="panel"><div class="panel-title">📊 <span data-i18n="chart_status">Status Langganan Aktif</span></div><div class="chart-box sm"><canvas id="cuChartStatus"></canvas></div></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="p-tab" id="ptab-bot" style="display:none;">
+        <div class="panel">
+            <div class="panel-title">🤖 <span data-i18n="bo_list_title">Bot Order Saya</span></div>
+            <div class="order-new-row"><button type="button" class="btn btn-primary" data-bot-order>🤖 <span data-i18n="bo_btn">Pesan Bot Order</span></button> <button type="button" class="btn btn-primary" data-bulk-order>🧺 <span data-i18n="bk_btn">Pesan Bulk Order</span></button></div>
+            <div class="filter-tabs" id="botKind">
+                <button type="button" data-bk="all" class="on"><span data-i18n="filter_all">Semua</span></button>
+                <button type="button" data-bk="bot">🤖 <span data-i18n="bo_kind_bot">Bot</span></button>
+                <button type="button" data-bk="bulk">🧺 <span data-i18n="bk_label">Bulk</span></button>
+            </div>
+            <div class="filter-tabs" id="botFilter">
+                <button type="button" data-bf="aktif" class="on"><span data-i18n="bo_f_active">Aktif</span> <i>0</i></button>
+                <button type="button" data-bf="arsip">🗂️ <span data-i18n="bo_f_archive">Arsip</span> <i>0</i></button>
+                <button type="button" data-bf="all"><span data-i18n="filter_all">Semua</span> <i>0</i></button>
+            </div>
+            <div id="botOrderList"></div>
+            <div class="state-block" id="botEmpty" style="display:none;"><div class="icon">🤖</div><div data-i18n="bo_list_empty">Belum ada bot order.</div></div>
+        </div>
+    </div>
+
+    <div class="p-tab" id="ptab-catalog" style="display:none;">
+        <div class="panel">
+            <div class="panel-title">🛍 <span data-i18n="cat_menu">Catalog</span></div>
+            <div class="muted" data-i18n="cat_menu_sub" style="font-size:12.5px;color:var(--text-secondary);margin-bottom:14px;"></div>
+            <div id="catAccordion"></div>
+        </div>
+        <div id="catMyOrders"></div>
+    </div>
+
+    <div class="p-tab" id="ptab-supply" style="display:none;">
+        <div id="supStokWrap">
+        <div class="panel">
+            <div class="panel-title">📦 <span data-i18n="supply_title">Supply & Stock</span></div>
+            <div class="muted" data-i18n="supply_sub" style="font-size:12.5px;color:var(--text-secondary);margin-bottom:14px;"></div>
+            <div id="supplyChat"></div>
+            <div id="supplyList"></div>
+            <div class="state-block" id="supplyEmpty" style="display:none;"><div class="icon">📦</div><div data-i18n="supply_empty">Belum ada stok yang ditampilkan.</div></div>
+        </div>
+        <div class="panel">
+            <div class="panel-title">🧾 <span data-i18n="supply_my_orders">Pesanan Supply Saya</span></div>
+            <div class="table-scroll"><table class="mini-table" id="supplyOrdersTable"><thead><tr>
+                <th data-i18n="col_date">Tanggal</th><th data-i18n="col_item">Barang</th><th data-i18n="col_qty">Jumlah</th><th data-i18n="col_status">Status</th><th></th></tr></thead>
+                <tbody id="supplyOrdersBody"></tbody></table></div>
+            <div class="state-block" id="supplyOrdersEmpty" style="display:none;"><div data-i18n="supply_no_orders">Belum ada pesanan supply.</div></div>
+        </div>
+            </div>
+    </div>
+
+    <div class="p-tab" id="ptab-renew" style="display:none;">
+        <div class="panel">
+            <div class="panel-title">🔄 <span data-i18n="rn_list_title">Permintaan Perpanjangan Saya</span></div>
+            <div class="order-new-row"><button type="button" class="btn btn-primary" data-new-order>➕ <span data-i18n="no_btn">Pesan Langganan Baru</span></button> <button type="button" class="btn btn-primary" data-bot-order>🤖 <span data-i18n="bo_btn">Pesan Bot Order</span></button> <button type="button" class="btn btn-primary" data-bulk-order>🧺 <span data-i18n="bk_btn">Pesan Bulk Order</span></button></div>
+            <div class="rn-banner" id="rnBanner" style="display:none;"></div>
+            <div id="rnList"></div>
+            <div class="state-block" id="rnEmpty" style="display:none;"><div class="icon">🔄</div><div><b data-i18n="rn_list_empty">Belum ada permintaan perpanjangan.</b></div><div style="font-size:12.5px;margin-top:4px;" data-i18n="rn_list_empty_sub"></div></div>
+        </div>
+    </div>
+
+    <div class="p-tab" id="ptab-arsip" style="display:none;">
+        <div class="panel">
+            <div class="panel-title">🗂️ <span data-i18n="archive_title">Arsip Pesanan Saya</span></div>
+            <div data-i18n="archive_sub" style="font-size:12.5px;color:var(--text-secondary);margin-bottom:14px;"></div>
+            <div class="table-scroll"><table class="mini-table"><thead><tr>
+                <th>#</th><th data-i18n="col_tagar">Tagar</th><th data-i18n="col_dashboard">Dashboard</th><th data-i18n="col_progress">Progres</th><th data-i18n="archive_archived_on">Diarsipkan</th><th></th></tr></thead>
+                <tbody id="arsipBody"></tbody></table></div>
+            <div class="state-block" id="arsipEmpty" style="display:none;"><div class="icon">🗂️</div><div data-i18n="archive_empty">Belum ada arsip pesanan.</div></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/lang-tr.js"></script>
+<script src="js/lang-vi.js"></script>
+<script src="js/lang-ar.js"></script>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/portal-extra.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/price.js"></script>
+<script src="js/payment.js"></script>
+<script src="js/coin.js"></script>
+<script src="js/bot-order.js"></script>
+<script src="js/bulk-order.js"></script>
+<script src="js/renewal.js"></script>
+<script src="js/new-order.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/admin-view.js"></script>
+</body>
+</html>

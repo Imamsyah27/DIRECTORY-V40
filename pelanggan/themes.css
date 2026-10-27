@@ -1,0 +1,127 @@
+/* =========================================================
+   PALET TEMA — dipilih lewat <html data-theme="putih|hitam|biru|pink">
+   Default = biru muda. Dimuat SEBELUM theme-dark.css (yang hanya memakai variabel ini).
+   Untuk menambah tema baru: salin satu blok di bawah, ganti nilainya.
+   ========================================================= */
+
+/* ---------- BIRU MUDA (default) : biru langit terang ---------- */
+:root, html[data-theme="biru"]{
+    --bg:#E8F3FC; --surface:#FFFFFF; --surface-alt:#F1F8FE; --surface-alt-2:#DCEDFA;
+    --border:#C3DCF2; --border-strong:#9CC4E6;
+    --text-primary:#0F2A44; --text-secondary:#33506C; --text-muted:#587592; --text-strong:#061A2E;
+
+    --primary:#4DB5F5; --primary-2:#2A9DEB; --primary-dark:#2A9DEB; --primary-ink:#0B6FB5; --primary-rgb:77,181,245;
+    --primary-soft:rgba(var(--primary-rgb),.18); --on-primary:#052038; --grad-primary:linear-gradient(135deg,#86D0FB,#3AA6EE);
+
+    --success:#067A55; --success-2:#05603F; --success-rgb:6,122,85; --success-soft:rgba(var(--success-rgb),.14);
+    --on-success:#FFFFFF; --grad-success:linear-gradient(135deg,#0A9468,#067A55);
+    --warning:#A84708; --warning-2:#8A3A06; --warning-rgb:168,71,8; --warning-soft:rgba(var(--warning-rgb),.14);
+    --danger:#C81444; --danger-2:#A30F37; --danger-rgb:200,20,68; --danger-soft:rgba(var(--danger-rgb),.12);
+    --grad-danger:linear-gradient(135deg,#E11D48,#BE123C);
+    --info:#0369A1; --info-rgb:3,105,161; --info-soft:rgba(var(--info-rgb),.12); --on-info:#FFFFFF;
+    --archive:#6D28D9; --archive-2:#5B21B6; --archive-rgb:109,40,217; --archive-soft:rgba(var(--archive-rgb),.12);
+    --on-archive:#FFFFFF; --grad-archive:linear-gradient(135deg,#8B5CF6,#6D28D9);
+
+    --head-bg:#D3E8F9; --head-text:#0B4F82; --zebra-a:#FFFFFF; --zebra-b:#F2F8FE; --row-hover-solid:#DDEFFD;
+    --card-grad:linear-gradient(180deg,#FFFFFF,#F2F8FE); --header-bg:rgba(255,255,255,.94);
+    --track:#D2E6F7; --overlay:rgba(10,30,55,.5); --notice-text:#0B4F82; --chart-grid:rgba(15,42,68,.10);
+
+    --shadow-xs:0 1px 2px rgba(20,70,120,.08); --shadow-sm:0 2px 8px rgba(20,70,120,.08);
+    --shadow-md:0 8px 24px rgba(20,70,120,.10); --shadow-lg:0 20px 48px rgba(20,70,120,.18);
+    --shadow-glow-primary:0 6px 18px rgba(var(--primary-rgb),.28);
+    color-scheme:light;
+}
+
+/* ---------- HITAM : hitam arang + emas (palet LENGKAP — tidak mewarisi tema lain) ---------- */
+html[data-theme="hitam"]{
+    --bg:#070707; --surface:#121212; --surface-alt:#1B1B1B; --surface-alt-2:#262626;
+    --border:#343434; --border-strong:#4D4D4D;
+    --text-primary:#FAF7EE; --text-secondary:#E2E2E2; --text-muted:#B0B0B0; --text-strong:#FFFFFF;
+
+    --primary:#FFC83D; --primary-2:#F0A500; --primary-dark:#F0A500; --primary-ink:#FFC83D; --primary-rgb:255,200,61;
+    --primary-soft:rgba(var(--primary-rgb),.16); --on-primary:#1A1300; --grad-primary:linear-gradient(135deg,#FFD35A,#F0A500);
+
+    --success:#34F0B0; --success-2:#1BC98E; --success-rgb:52,240,176; --success-soft:rgba(var(--success-rgb),.16);
+    --on-success:#052B1F; --grad-success:linear-gradient(135deg,#34F0B0,#1BC98E);
+    --warning:#FFA94D; --warning-2:#FF8A1F; --warning-rgb:255,169,77; --warning-soft:rgba(var(--warning-rgb),.18);
+    --danger:#FF6B8A; --danger-2:#F43F6B; --danger-rgb:255,107,138; --danger-soft:rgba(var(--danger-rgb),.18);
+    --grad-danger:linear-gradient(135deg,#FF6B8A,#F43F6B);
+    --info:#3DDCFF; --info-rgb:61,220,255; --info-soft:rgba(var(--info-rgb),.16); --on-info:#04222B;
+    --archive:#C3A0FF; --archive-2:#A06BFF; --archive-rgb:195,160,255; --archive-soft:rgba(var(--archive-rgb),.18);
+    --on-archive:#1B0B3A; --grad-archive:linear-gradient(135deg,#C3A0FF,#A06BFF);
+
+    --head-bg:#242424; --head-text:#FFE08A; --zebra-a:#0E0E0E; --zebra-b:#151515; --row-hover-solid:#2A251A;
+    --card-grad:linear-gradient(180deg,#1A1A1A,#121212); --header-bg:rgba(7,7,7,.94);
+    --track:#333333; --overlay:rgba(0,0,0,.78); --notice-text:#FFE9A8; --chart-grid:rgba(255,255,255,.12);
+
+    --shadow-xs:0 1px 2px rgba(0,0,0,.4); --shadow-sm:0 2px 8px rgba(0,0,0,.35);
+    --shadow-md:0 8px 24px rgba(0,0,0,.4); --shadow-lg:0 20px 48px rgba(0,0,0,.55);
+    --shadow-glow-primary:0 6px 18px rgba(var(--primary-rgb),.25);
+    color-scheme:dark;
+}
+
+/* ---------- PUTIH : terang bersih + emas tua ---------- */
+html[data-theme="putih"]{
+    --bg:#EEF1F7; --surface:#FFFFFF; --surface-alt:#F3F5FA; --surface-alt-2:#E6EAF3;
+    --border:#D3D9E8; --border-strong:#B5BED6;
+    --text-primary:#141A2E; --text-secondary:#3A4360; --text-muted:#5C668A; --text-strong:#0B1020;
+
+    --primary:#F5B400; --primary-2:#D99700; --primary-dark:#D99700; --primary-ink:#8A5A00; --primary-rgb:224,160,0;
+    --on-primary:#1A1300; --grad-primary:linear-gradient(135deg,#FFC93A,#E39F00);
+
+    --success:#067A55; --success-2:#05603F; --success-rgb:6,122,85; --on-success:#FFFFFF; --grad-success:linear-gradient(135deg,#0A9468,#067A55);
+    --warning:#A84708; --warning-2:#8A3A06; --warning-rgb:168,71,8;
+    --danger:#C81444; --danger-2:#A30F37; --danger-rgb:200,20,68; --grad-danger:linear-gradient(135deg,#E11D48,#BE123C);
+    --info:#0369A1; --info-rgb:3,105,161; --on-info:#FFFFFF;
+    --archive:#6D28D9; --archive-2:#5B21B6; --archive-rgb:109,40,217; --on-archive:#FFFFFF; --grad-archive:linear-gradient(135deg,#8B5CF6,#6D28D9);
+
+    --head-bg:#E4E9F5; --head-text:#6B4700; --zebra-a:#FFFFFF; --zebra-b:#F5F7FC; --row-hover-solid:#FFF3D1;
+    --card-grad:linear-gradient(180deg,#FFFFFF,#F7F9FD); --header-bg:rgba(255,255,255,.94);
+    --track:#DDE3F0; --overlay:rgba(15,20,40,.55); --notice-text:#5C3D00; --chart-grid:rgba(20,26,46,.10);
+
+    --shadow-xs:0 1px 2px rgba(30,40,90,.08); --shadow-sm:0 2px 8px rgba(30,40,90,.08);
+    --shadow-md:0 8px 24px rgba(30,40,90,.10); --shadow-lg:0 20px 48px rgba(30,40,90,.18);
+    color-scheme:light;
+}
+
+/* ---------- PINK : latar pink lembut + magenta ---------- */
+html[data-theme="pink"]{
+    --bg:#FFEFF6; --surface:#FFFFFF; --surface-alt:#FFF5FA; --surface-alt-2:#FFE3EF;
+    --border:#F5C6DB; --border-strong:#E89DBF;
+    --text-primary:#2B0F1F; --text-secondary:#5A2F45; --text-muted:#80506A; --text-strong:#1A0610;
+
+    --primary:#E5126F; --primary-2:#C20A5A; --primary-dark:#C20A5A; --primary-ink:#C20A5A; --primary-rgb:229,18,111;
+    --on-primary:#FFFFFF; --grad-primary:linear-gradient(135deg,#F0207F,#D10D62);
+
+    --success:#067A55; --success-2:#05603F; --success-rgb:6,122,85; --on-success:#FFFFFF; --grad-success:linear-gradient(135deg,#0A9468,#067A55);
+    --warning:#A84708; --warning-2:#8A3A06; --warning-rgb:168,71,8;
+    --danger:#B4123F; --danger-2:#8F0D31; --danger-rgb:180,18,63; --grad-danger:linear-gradient(135deg,#D3174D,#A30F37);
+    --info:#0369A1; --info-rgb:3,105,161; --on-info:#FFFFFF;
+    --archive:#6D28D9; --archive-2:#5B21B6; --archive-rgb:109,40,217; --on-archive:#FFFFFF; --grad-archive:linear-gradient(135deg,#8B5CF6,#6D28D9);
+
+    --head-bg:#FFDCEB; --head-text:#A00A4E; --zebra-a:#FFFFFF; --zebra-b:#FFF4F9; --row-hover-solid:#FFE0EE;
+    --card-grad:linear-gradient(180deg,#FFFFFF,#FFF7FB); --header-bg:rgba(255,255,255,.94);
+    --track:#F8D6E6; --overlay:rgba(60,10,35,.5); --notice-text:#7A0A3C; --chart-grid:rgba(90,20,60,.10);
+
+    --shadow-xs:0 1px 2px rgba(120,20,70,.08); --shadow-sm:0 2px 8px rgba(120,20,70,.08);
+    --shadow-md:0 8px 24px rgba(120,20,70,.12); --shadow-lg:0 20px 48px rgba(120,20,70,.2);
+    color-scheme:light;
+}
+
+/* ---------- Tombol ganti tema (gaya sama seperti tombol bahasa) ---------- */
+.switch-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+.theme-switch{ display:flex; gap:6px; flex-wrap:wrap; }
+.theme-switch button{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:8px;
+    border:1.5px solid var(--border); background:var(--surface); color:var(--text-secondary);
+    font-family:var(--font-body, inherit); font-size:12px; font-weight:700; cursor:pointer;
+}
+.theme-switch button:hover{ border-color:var(--primary); color:var(--primary-ink); }
+.theme-switch button.active{ background:var(--primary); border-color:var(--primary); color:var(--on-primary); }
+.theme-switch .dot{ width:12px; height:12px; border-radius:50%; border:1.5px solid rgba(128,128,128,.7); flex:0 0 12px; }
+.theme-switch [data-theme-set="putih"] .dot{ background:#FFFFFF; }
+.theme-switch [data-theme-set="hitam"] .dot{ background:#0B0B0B; }
+.theme-switch [data-theme-set="biru"] .dot{ background:#7CCBFA; }
+.theme-switch [data-theme-set="pink"] .dot{ background:#FF5CA8; }
+header.app-header .theme-switch{ margin-left:auto; align-self:center; }
+@media (max-width:640px){ header.app-header .theme-switch{ margin-left:0; } .switch-row{ justify-content:flex-start; } }
